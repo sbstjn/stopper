@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Minimal stopwatch object to count and measure time in your applications.",
   "main": "./src/stopper.js",
+  "keywords": ["count", "measure", "time", "stopwatch", "runtime", "metrics", "performance"],
   "scripts": {
     "test": "./node_modules/.bin/mocha --ui tdd"
   },
@@ -18,5 +19,9 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sbstjn/stopper.git"
   }
 }
