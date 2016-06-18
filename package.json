@@ -1,0 +1,16 @@
+{
+  "name": "stopper",
+  "version": "0.1.0",
+  "description": "Minimal stopwatch object to count and measure time in your applications.",
+  "main": "./src/stopper.js",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --ui tdd"
+  },
+  "keywords": [],
+  "author": "Sebastian Müller <mail@sbstjn.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
