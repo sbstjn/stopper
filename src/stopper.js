@@ -2,8 +2,9 @@
   'use strict';
 
   class Stopper {
-    constructor() {
-      this.dates = {start: null, stop: null, laps: []};
+    constructor(name, start, stop) {
+      this.name = name;
+      this.dates = {start: start, stop: stop, laps: []};
       this.hooks = {start: [], stop: [], split: []};
     }
 
@@ -31,7 +32,7 @@
       this.emit('stop', this.dates.stop);
     }
 
-    split() {
+    split(name) {
       if (!this.dates.start) {
         throw new Error('Stopper not started!');
       }
@@ -40,7 +41,7 @@
         throw new Error('Stopper already stopped!');
       }
 
-      this.dates.laps.push(new Date());
+      this.dates.laps.push(new Stopper(name, this.dates.start, new Date()));
 
       this.emit('split', this.dates.laps[this.dates.laps.length - 1]);
     }

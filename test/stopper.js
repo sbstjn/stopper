@@ -21,7 +21,7 @@
 
     suite('Data', function() {
       test('list of available Stopper properties', function() {
-        assert.deepEqual(Object.keys(this.stp), ['dates', 'hooks']);
+        assert.deepEqual(Object.keys(this.stp), ['name', 'dates', 'hooks']);
       });
 
       test('has array of Stopper laps', function() {
@@ -49,8 +49,15 @@
       test('start sets date', function() {
         this.stp.start();
 
-        assert.notEqual(this.stp.dates.start, null)
+        assert.notEqual(this.stp.dates.start, undefined)
         assert.equal(this.stp.dates.start.constructor.name, 'Date');
+      });
+
+      test('init with start date', function() {
+        let tmp = new Stopper('name', new Date());
+
+        assert.notEqual(tmp.dates.start, undefined)
+        assert.equal(tmp.dates.start.constructor.name, 'Date');
       });
 
       test('mutliple starts fail', function(done) {
@@ -82,8 +89,15 @@
         this.stp.start();
         this.stp.stop();
 
-        assert.notEqual(this.stp.dates.stop, null)
+        assert.notEqual(this.stp.dates.stop, undefined)
         assert.equal(this.stp.dates.stop.constructor.name, 'Date');
+      });
+
+      test('init with stop date', function() {
+        let tmp = new Stopper('name', new Date(), new Date());
+
+        assert.notEqual(tmp.dates.stop, undefined)
+        assert.equal(tmp.dates.stop.constructor.name, 'Date');
       });
 
       test('mutliple stops fail', function(done) {
@@ -117,11 +131,15 @@
 
         this.stp.split();
         assert.equal(this.stp.dates.laps.length, 1);
-        assert.equal(this.stp.dates.laps[0].constructor.name, 'Date');
+        assert.equal(this.stp.dates.laps[0].constructor.name, 'Stopper');
+        assert.equal(this.stp.dates.laps[0].dates.start.constructor.name, 'Date');
+        assert.equal(this.stp.dates.laps[0].dates.stop.constructor.name, 'Date');
 
         this.stp.split();
         assert.equal(this.stp.dates.laps.length, 2);
-        assert.equal(this.stp.dates.laps[1].constructor.name, 'Date');
+        assert.equal(this.stp.dates.laps[1].constructor.name, 'Stopper');
+        assert.equal(this.stp.dates.laps[1].dates.start.constructor.name, 'Date');
+        assert.equal(this.stp.dates.laps[1].dates.stop.constructor.name, 'Date');
       });
 
       test('split without start fails', function(done) {
@@ -160,8 +178,9 @@
             this.stp.stop();
 
             assert.isAbove(this.stp.dates.stop, this.stp.dates.start);
-            assert.isAbove(this.stp.dates.laps[0], this.stp.dates.start);
-            assert.isAbove(this.stp.dates.stop, this.stp.dates.laps[0]);
+            assert.deepEqual(this.stp.dates.laps[0].dates.start, this.stp.dates.start);
+            assert.isAbove(this.stp.dates.laps[0].dates.stop, this.stp.dates.start);
+            assert.isAbove(this.stp.dates.stop, this.stp.dates.laps[0].dates.stop);
 
             done();
           }, 12);
@@ -181,6 +200,27 @@
       });
     });
 
+    suite('Naming', function() {
+      test('set name for Stopper', function() {
+        let tmp = new Stopper('custom name');
+
+        assert.equal(tmp.name, 'custom name');
+      });
+
+      test('set name for Stopper splits', function() {
+        this.stp.start();
+
+        this.stp.split('first');
+        assert.equal(this.stp.dates.laps.length, 1);
+        assert.equal(this.stp.dates.laps[0].constructor.name, 'Stopper');
+        assert.equal(this.stp.dates.laps[0].name, 'first');
+
+        this.stp.split('second');
+        assert.equal(this.stp.dates.laps.length, 2);
+        assert.equal(this.stp.dates.laps[1].name, 'second');
+      });
+    });
+
     suite('Events', function() {
       suite('Binding', function() {
         test('fail to bind unavailable event', function(done) {
@@ -190,7 +230,7 @@
             done(new Error('Bound invalid event!'));
           } catch (e) {
             assert.equal(e.message, 'Unknown event invalid');
-            
+
             done();
           }
         });
