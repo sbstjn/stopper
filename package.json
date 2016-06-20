@@ -22,5 +22,8 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/sbstjn/stopper.git"
+  },
+  "engines": {
+    "node": ">=6.0"
   }
 }
