@@ -174,33 +174,33 @@
 
         setTimeout(() => {
           stp.split('first');
-        }, 200);
+        }, 20);
 
         setTimeout(() => {
           stp.split('second');
-        }, 400);
+        }, 40);
 
         setTimeout(() => {
           stp.split('third');
-        }, 800);
+        }, 80);
 
         setTimeout(() => {
           stp.split('fourth');
-        }, 1000);
+        }, 100);
 
         setTimeout(() => {
           stp.stop();
 
-          assert.approximately(stp.lap('first').measure(),  200, 10, 'first split');
-          assert.approximately(stp.lap('second').measure(), 200, 10, 'second split');
-          assert.approximately(stp.lap('third').measure(),  400, 10, 'third split');
-          assert.approximately(stp.lap('fourth').measure(), 200, 10, 'fourth split');
+          assert.approximately(stp.lap('first').measure(),  20, 5, 'first split');
+          assert.approximately(stp.lap('second').measure(), 20, 5, 'second split');
+          assert.approximately(stp.lap('third').measure(),  40, 5, 'third split');
+          assert.approximately(stp.lap('fourth').measure(), 20, 5, 'fourth split');
 
-          assert.approximately(stp.measure(), 1100, 10, 'total');
+          assert.approximately(stp.measure(), 110, 5, 'total');
           assert.equal(stp.laps().length, 4);
 
           done();
-        }, 1100);
+        }, 110);
       });
 
       test('split is between start and stop', function(done) {
