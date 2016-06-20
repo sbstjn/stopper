@@ -5,7 +5,8 @@
   "main": "./src/stopper.js",
   "keywords": [],
   "scripts": {
-    "test": "./node_modules/.bin/mocha --ui tdd"
+    "test": "./node_modules/.bin/mocha --ui tdd",
+    "watch": "./node_modules/.bin/mocha --ui tdd -w"
   },
   "author": "Sebastian Müller <mail@sbstjn.com>",
   "license": "MIT",
