@@ -57,9 +57,7 @@
     }
 
     laps() {
-      return this.dates.laps.map((item) => {
-        return {name: item.name, time: item.measure()};
-      });
+      return this.dates.laps;
     }
 
     emit(event, data) {
