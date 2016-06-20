@@ -15,7 +15,7 @@
       });
 
       test('list of available Stopper methods', function() {
-        assert.deepEqual(Object.getOwnPropertyNames(Stopper.prototype), ['constructor', 'start', 'stop', 'split', 'measure', 'lap', 'laps', 'emit', 'on']);
+        assert.deepEqual(Object.getOwnPropertyNames(Stopper.prototype), ['constructor', 'emit', 'last', 'lap', 'laps', 'measure', 'on', 'split', 'start', 'stop']);
       });
     });
 
@@ -166,6 +166,41 @@
 
           done();
         }
+      });
+
+      test('split does have a corrent start and stop', function(done) {
+        let stp = new Stopper('example');
+        stp.start();
+
+        setTimeout(() => {
+          stp.split('first');
+        }, 200);
+
+        setTimeout(() => {
+          stp.split('second');
+        }, 400);
+
+        setTimeout(() => {
+          stp.split('third');
+        }, 800);
+
+        setTimeout(() => {
+          stp.split('fourth');
+        }, 1000);
+
+        setTimeout(() => {
+          stp.stop();
+
+          assert.approximately(stp.lap('first').measure(),  200, 10, 'first split');
+          assert.approximately(stp.lap('second').measure(), 200, 10, 'second split');
+          assert.approximately(stp.lap('third').measure(),  400, 10, 'third split');
+          assert.approximately(stp.lap('fourth').measure(), 200, 10, 'fourth split');
+
+          assert.approximately(stp.measure(), 1100, 10, 'total');
+          assert.equal(stp.laps().length, 4);
+
+          done();
+        }, 1100);
       });
 
       test('split is between start and stop', function(done) {
