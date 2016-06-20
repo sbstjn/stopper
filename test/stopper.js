@@ -15,7 +15,7 @@
       });
 
       test('list of available Stopper methods', function() {
-        assert.deepEqual(Object.getOwnPropertyNames(Stopper.prototype), ['constructor', 'start', 'stop', 'split', 'measure', 'emit', 'on']);
+        assert.deepEqual(Object.getOwnPropertyNames(Stopper.prototype), ['constructor', 'start', 'stop', 'split', 'measure', 'lap', 'laps', 'emit', 'on']);
       });
     });
 
@@ -218,6 +218,23 @@
         this.stp.split('second');
         assert.equal(this.stp.dates.laps.length, 2);
         assert.equal(this.stp.dates.laps[1].name, 'second');
+      });
+
+      test('get lap for name', function() {
+        this.stp.start();
+        this.stp.split('test1');
+        this.stp.split('test2');
+        this.stp.split('test3');
+        this.stp.stop();
+
+        assert.equal(this.stp.lap('test1').constructor.name, 'Stopper');
+        assert.equal(this.stp.lap('test1').name, 'test1');
+
+        assert.equal(this.stp.lap('test3').constructor.name, 'Stopper');
+        assert.equal(this.stp.lap('test3').name, 'test3');
+
+        assert.equal(this.stp.laps().constructor.name, 'Array');
+        assert.equal(this.stp.laps().length, 3);
       });
     });
 

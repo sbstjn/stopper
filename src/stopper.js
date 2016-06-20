@@ -50,6 +50,18 @@
       return this.dates.stop - this.dates.start;
     }
 
+    lap(name) {
+      return this.dates.laps.find((item) => {
+        return item.name === name;
+      });
+    }
+
+    laps() {
+      return this.dates.laps.map((item) => {
+        return {name: item.name, time: item.measure()};
+      });
+    }
+
     emit(event, data) {
       this.hooks[event].forEach((el) => {
         el(data);
