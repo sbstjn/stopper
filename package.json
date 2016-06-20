@@ -1,6 +1,6 @@
 {
   "name": "stopper",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Minimal stopwatch object to count and measure time in your applications.",
   "main": "./src/stopper.js",
   "keywords": [],

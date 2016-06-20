@@ -1,6 +1,6 @@
 # stopper
 
-[![Travis](https://img.shields.io/travis/sbstjn/stopper.svg?maxAge=2592000)](https://travis-ci.org/sbstjn/stopper) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](https://github.com/sbstjn/stopper/commits/master)
+[![Travis](https://img.shields.io/travis/sbstjn/stopper.svg?maxAge=2592000)](https://travis-ci.org/sbstjn/stopper) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](https://github.com/sbstjn/stopper/commits/master) [![npm](https://img.shields.io/npm/dt/stopper.svg?maxAge=2592000)](https://www.npmjs.com/package/stopper) [![npm](https://img.shields.io/npm/v/stopper.svg?maxAge=2592000)](https://www.npmjs.com/package/stopper)
 
 A minimal JavaScript stopwatch object to count and measure time in your Node.js
 or browser applications.
