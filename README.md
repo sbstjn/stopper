@@ -4,3 +4,27 @@
 
 A minimal JavaScript stopwatch object to count and measure time in your Node.js
 or browser applications.
+
+```js
+(() => {
+  'use strict';
+
+  const Stopper = require('stopper')  
+    , util = require('util');
+
+  const stp = new Stopper('A nice but optional name');
+
+  stp.start();
+
+  setTimeout(() => {
+    stp.stop();
+
+    util.log(stp.measure());
+  }, 600);
+})();
+```
+
+```bash
+$ > node test.js
+20 Jun 09:36:58 - 603
+```

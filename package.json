@@ -1,6 +1,6 @@
 {
   "name": "stopper",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Minimal stopwatch object to count and measure time in your applications.",
   "main": "./src/stopper.js",
   "keywords": [],
@@ -22,5 +22,8 @@
   "repository": {
     "type": "git",
     "url": "git://github.com/sbstjn/stopper.git"
+  },
+  "engines": {
+    "node": ">=6.0"
   }
 }
