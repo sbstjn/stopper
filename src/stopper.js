@@ -49,9 +49,13 @@
         throw new Error('Stopper already stopped!');
       }
 
-      let start = this.laps().length === 0 ? this.dates.start : this.last().dates.stop;
-
-      this.dates.laps.push(new Stopper(name, start, new Date()));
+      this.dates.laps.push(
+        new Stopper(
+          name,
+          this.laps().length === 0 ? this.dates.start : this.last().dates.stop,
+          new Date()
+        )
+      );
 
       this.emit('split', this.dates.laps[this.dates.laps.length - 1]);
     }

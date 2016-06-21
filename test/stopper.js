@@ -10,7 +10,7 @@
     });
 
     suite('Object', function() {
-      test('constructor returns Stopper object', function() {
+      test('constructor returns Stopper', function() {
         assert.equal(this.stp.constructor.name, 'Stopper');
       });
 
@@ -25,7 +25,7 @@
       });
 
       test('has array of Stopper laps', function() {
-        assert.equal(this.stp.dates.laps.constructor.name, 'Array');
+        assert.typeOf(this.stp.dates.laps, 'Array');
       });
     });
 
@@ -56,8 +56,7 @@
       test('init with start date', function() {
         let tmp = new Stopper('name', new Date());
 
-        assert.notEqual(tmp.dates.start, undefined)
-        assert.equal(tmp.dates.start.constructor.name, 'Date');
+        assert.typeOf(tmp.dates.start, 'Date');
       });
 
       test('mutliple starts fail', function(done) {
@@ -89,15 +88,13 @@
         this.stp.start();
         this.stp.stop();
 
-        assert.notEqual(this.stp.dates.stop, undefined)
-        assert.equal(this.stp.dates.stop.constructor.name, 'Date');
+        assert.typeOf(this.stp.dates.stop, 'Date');
       });
 
       test('init with stop date', function() {
         let tmp = new Stopper('name', new Date(), new Date());
 
-        assert.notEqual(tmp.dates.stop, undefined)
-        assert.equal(tmp.dates.stop.constructor.name, 'Date');
+        assert.typeOf(tmp.dates.stop, 'Date');
       });
 
       test('mutliple stops fail', function(done) {
@@ -132,14 +129,14 @@
         this.stp.split();
         assert.equal(this.stp.dates.laps.length, 1);
         assert.equal(this.stp.dates.laps[0].constructor.name, 'Stopper');
-        assert.equal(this.stp.dates.laps[0].dates.start.constructor.name, 'Date');
-        assert.equal(this.stp.dates.laps[0].dates.stop.constructor.name, 'Date');
+        assert.typeOf(this.stp.dates.laps[0].dates.start, 'Date');
+        assert.typeOf(this.stp.dates.laps[0].dates.stop, 'Date');
 
         this.stp.split();
         assert.equal(this.stp.dates.laps.length, 2);
         assert.equal(this.stp.dates.laps[1].constructor.name, 'Stopper');
-        assert.equal(this.stp.dates.laps[1].dates.start.constructor.name, 'Date');
-        assert.equal(this.stp.dates.laps[1].dates.stop.constructor.name, 'Date');
+        assert.typeOf(this.stp.dates.laps[1].dates.start, 'Date');
+        assert.typeOf(this.stp.dates.laps[1].dates.stop, 'Date');
       });
 
       test('split without start fails', function(done) {
@@ -268,7 +265,7 @@
         assert.equal(this.stp.lap('test3').constructor.name, 'Stopper');
         assert.equal(this.stp.lap('test3').name, 'test3');
 
-        assert.equal(this.stp.laps().constructor.name, 'Array');
+        assert.typeOf(this.stp.laps(), 'Array');
         assert.equal(this.stp.laps().length, 3);
       });
     });
